@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import ContactForm from "./ContactForm";
 
-const ContactList = ({ contacts, onSelectContact, onAddContact, onUpdateContact }) => {
+const ContactList = ({ contacts,
+  onSelectContact,
+  onAddContact,
+  onUpdateContact,
+  onDeleteContact }) => {
   const [search, setSearch] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [editContact, setEditContact] = useState(null); 
@@ -42,30 +46,36 @@ const ContactList = ({ contacts, onSelectContact, onAddContact, onUpdateContact 
           onChange={(e) => setSearch(e.target.value)}
         />
         <ul className="list-group">
-          {filteredContacts.map((contact) => (
-            <li
-              key={contact.id}
-              className="list-group-item d-flex justify-content-between align-items-center"
-            >
-              <span
-                style={{ cursor: "pointer" }}
-                onClick={() => onSelectContact(contact)}
-              >
-                <i className="bi bi-person-circle me-2"></i>
-                {contact.name}
-              </span>
-              <div>
-                <span className="me-3">{contact.phone}</span>
-                <button
-                  className="btn btn-sm btn-outline-secondary"
-                  onClick={() => handleEditClick(contact)}
-                >
-                  Edit
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
+  {filteredContacts.map((contact) => (
+    <li
+      key={contact.id}
+      className="list-group-item d-flex justify-content-between align-items-center"
+    >
+      <span
+        style={{ cursor: "pointer" }}
+        onClick={() => onSelectContact(contact)}
+      >
+        <i className="bi bi-person-circle me-2"></i>
+        {contact.name}
+      </span>
+      <div>
+        <span className="me-3">{contact.phone}</span>
+        <button
+          className="btn btn-sm btn-outline-secondary me-2"
+          onClick={() => handleEditClick(contact)}
+        >
+          Edit
+        </button>
+        <button
+          className="btn btn-sm btn-outline-danger"
+          onClick={() => onDeleteContact(contact.id)}
+        >
+          Delete
+        </button>
+      </div>
+    </li>
+  ))}
+</ul>
       </div>
 
             {showModal && (

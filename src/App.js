@@ -20,18 +20,23 @@ const App = () => {
       )
     );
   };
-
+  const handleDeleteContact = (contactId) => {
+    setContacts(contacts.filter((contact) => contact.id !== contactId));
+  };
+  
   return (
     <div className="container">
       <Header />
       <div className="row">
         <div className="col-md-4">
-          <ContactList
-            contacts={contacts}
-            onSelectContact={setSelectedContact}
-            onAddContact={handleAddContact}
-            onUpdateContact={handleUpdateContact}
-          />
+        <ContactList
+        contacts={contacts}
+        onSelectContact={setSelectedContact}
+        onAddContact={handleAddContact}
+        onUpdateContact={handleUpdateContact}
+        onDeleteContact={handleDeleteContact}
+      />
+
         </div>
         <div className="col-md-4">
           {selectedContact ? (
